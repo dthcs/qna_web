@@ -108,6 +108,10 @@
         </footer> -->
 
      <!--Footer Start-->
+     <a href="#" class="scroll-top-button">
+      <span class="arrow"></span>
+    </a>
+
     <footer>
       <div id="social-images" class = "clearfix">
           <span id = "fb" class = "image"></span>
@@ -129,6 +133,11 @@
           alert(new URL(location.href).searchParams.get('error'));
         }
       };
+
+      document.querySelector('.scroll-top-button').addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
     </script>
     {% block script %}
     {% endblock %}
