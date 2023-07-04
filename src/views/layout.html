@@ -25,11 +25,19 @@
               <li><a href="#">Media</a></li>
             </ul>
           </li>
+          {% if admin and admin.id %}
+          
+          {% else %}
+          <li><a href="/admin" >Admin</a></li>
+          {% endif %}
         </ul>
         <!-- search -->
         <div class="search-btn">
           {% if user and user.id %}
           <a class="user-name" href="/profile">{{user.nick}}</a>
+          <a id="logout" href="/auth/logout" class="btn">Logout</a>
+          {% elif admin and admin.id %}
+          <a class="admin-name" href="/admin/profile">{{admin.nick}}</a>
           <a id="logout" href="/auth/logout" class="btn">Logout</a>
           {% else %}
           <a id="login" href="/login" class="btn">Login</a>
@@ -82,6 +90,7 @@
           <a id="my-profile" href="/profile" class="btn">My Profile</a>
           <a id="logout" href="/auth/logout" class="btn">Logout</a>
         {% else %}
+          <p>hello</p>
           <!-- <form id="login-form" action="/auth/login" method="post">
             <div class="input-group">
               <label for="email">Email</label>
@@ -126,7 +135,7 @@
       </span>
     </footer>
    <!--Footer End-->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
     <script>
       window.onload = () => {
         if (new URL(location.href).searchParams.get('error')) {
