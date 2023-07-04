@@ -12,6 +12,9 @@ router.post('/join', isNotLoggedIn, join);
 // POST /auth/login
 router.post('/login', isNotLoggedIn, login);
 
+// POST /auth/admin
+// router.post('/admin', isNotLoggedIn, admin);
+
 // GET /auth/logout
 router.get('/logout', isLoggedIn, logout);
 

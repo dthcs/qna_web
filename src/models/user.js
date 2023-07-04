@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 
 class User extends Sequelize.Model {
   static initiate(sequelize) {
@@ -24,6 +24,9 @@ class User extends Sequelize.Model {
       snsId: {
         type: Sequelize.STRING(30),
         allowNull: true,
+      },
+      role: {
+        type: DataTypes.ENUM('user', 'admin'), // Example role options
       },
     }, {
       sequelize,

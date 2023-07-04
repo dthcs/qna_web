@@ -18,6 +18,8 @@ router.get('/join', isNotLoggedIn, renderJoin);
 
 router.get('/login', isNotLoggedIn, renderLogin);
 
+// router.get('/admin', isNotLoggedIn,  renderAdmin);
+
 router.get('/', renderMain);
 
 module.exports = router;

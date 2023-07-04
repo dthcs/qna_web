@@ -10,6 +10,10 @@ exports.renderLogin = (req, res) => {
     res.render('login', {title: 'Login'});
 };
 
+// exports.renderAdmin = (req, res) => {
+//     res.render('admin', {title: 'Admin'});
+// };
+
 exports.renderMain = (req, res, next) => {
     const twits = [];
     res.render('main', {
