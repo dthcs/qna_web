@@ -14,6 +14,10 @@ exports.renderLogin = (req, res) => {
 //     res.render('admin', {title: 'Admin'});
 // };
 
+exports.renderContact = (req, res) => {
+    res.render('contact', {title: 'Contact'});
+};
+
 exports.renderMain = (req, res, next) => {
     const twits = [];
     res.render('main', {
