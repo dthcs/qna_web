@@ -1,0 +1,124 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<head>
+  <meta charset="UTF-8">
+  <title>Liên hệ</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #861a1a;
+      color: #fff;
+      padding: 10px;
+    }
+
+    header h1 {
+      margin: 0;
+      padding: 0;
+      font-size: 24px;
+    }
+
+    section {
+      padding: 20px;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    .contact-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .contact-info i {
+      margin-right: 10px;
+    }
+
+    .contact-form {
+      max-width: 400px;
+    }
+
+    .contact-form label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    .contact-form button {
+      background-color: #4a0e0e;
+      color: #b0a2a2;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <a href="#"><img src="img/R.png" alt="ảnh" width="50" height="auto"></a>
+        <h1>ĐẠI HỌC BÁCH KHOA HÀ NỘI</h1>
+        
+        
+      </header>
+
+  <section>
+    <h2>Thông tin liên hệ</h2>
+    <div class="contact-info">
+      <i class="fas fa-map-marker-alt"></i>
+      <p>Address: Số 1 Đại Cồ Việt</p>
+    </div>
+    <div class="contact-info">
+      <i class="fas fa-phone"></i>
+      <p>Phone: +123456789</p>
+    </div>
+    <div class="contact-info">
+      <i class="fas fa-envelope"></i>
+      <p>Contact: ngoc.da212330@sis.hust.edu.vn</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Thông tin giới thiệu</h2>
+    <p>
+      Chào mừng bạn đến với trang web của chúng tôi! Chúng tôi cung cấp các dịch vụ chất lượng và đội ngũ nhân viên chuyên nghiệp. Hãy liên hệ với chúng tôi để biết thêm thông tin chi tiết và đặt dịch vụ.
+    </p>
+  </section>
+
+  <section>
+    <h2>Gửi ý kiến liên hệ</h2>
+    <form class="contact-form" action="submit" method="POST">
+      <label for="name">Họ và tên:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="message">Nội dung:</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+
+      <button type="submit">Gửi</button>
+    </form>
+  </section>
+
+  <footer>
+    Bản quyền &copy; 2023 Trang web của chúng tôi. Được phát triển bởi Ceongocdoan.
+  </footer>
+</body>
+{% endblock %}

@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const User = require('../models/user');
+const Post = require('../models/post')
 // const Admin = require('../models/admin')
 
 exports.join = async (req, res, next) => {
@@ -50,27 +51,28 @@ exports.login = (req, res, next) => {
   })(req, res, next); // 미들웨어 내의 미들웨어에는 (req, res, next)를 붙입니다.
 };
 
-// exports.admin = (req, res, next) => {
-//   passport.authenticate('local', (authError, admin, info) => {
-//     if (authError) {
-//       console.error(authError);
-//       return next(authError);
-//     }
-//     if (!admin) {
-//       return res.redirect(`/?error=${info.message}`);
-//     }
-//     return req.login(admin, (loginError) => {
-//       if (loginError) {
-//         console.error(loginError);
-//         return next(loginError);
-//       }
-//       return res.redirect('/');
-//     });
-//   })(req, res, next); // 미들웨어 내의 미들웨어에는 (req, res, next)를 붙입니다.
-// };
 
 exports.logout = (req, res) => {
   req.logout(() => {
     res.redirect('/');
   });
 };
+
+exports.post = async (req, res, next) => {
+  // const { email, nick, password, role } = req.body;
+  const { content } = req.body;
+  try {
+    // const exUser = await User.findOne({ where: { email } });
+    // if (exUser) {
+    //   return res.redirect('/join?error=exist');
+    // }
+    // const hash = await bcrypt.hash(password, 12);
+    await Post.create({
+      content,
+    });
+    return res.redirect('/');
+  } catch (error) {
+    console.error(error);
+    return next(error);
+  }
+}

@@ -1,6 +1,6 @@
 const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('../middlewares');
-const { renderProfile, renderJoin, renderLogin, renderMain } = require('../controllers/page');
+const { renderProfile, renderJoin, renderLogin, renderContact, renderMain } = require('../controllers/page');
 
 const router = express.Router();
 
@@ -20,6 +20,10 @@ router.get('/login', isNotLoggedIn, renderLogin);
 
 // router.get('/admin', isNotLoggedIn,  renderAdmin);
 
+router.get('/contact', renderContact);
+
 router.get('/', renderMain);
+
+// router.get('/post', renderPost);
 
 module.exports = router;

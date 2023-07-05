@@ -6,15 +6,17 @@
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="/main.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   </head>
   <body>
 
       <div id="header">
         <ul id="nav">
-          <li><a href="#">Home</a></li>
-          <li><a href="#band">Band</a></li>
-          <li><a href="#tour">Tour</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/">About</a></li>
+          <li><a href="/">Question</a></li>
+          <li><a href="/contact">Contact</a></li>
           <li>
             <a href="#">More
               <i class="nav-arrow-down ti-angle-down"></i>
@@ -36,9 +38,9 @@
           {% if user and user.id %}
           <a class="user-name" href="/profile">{{user.nick}}</a>
           <a id="logout" href="/auth/logout" class="btn">Logout</a>
-          {% elif admin and admin.id %}
+          <!-- {% elif admin and admin.id %}
           <a class="admin-name" href="/admin/profile">{{admin.nick}}</a>
-          <a id="logout" href="/auth/logout" class="btn">Logout</a>
+          <a id="logout" href="/auth/logout" class="btn">Logout</a> -->
           {% else %}
           <a id="login" href="/login" class="btn">Login</a>
           <a id="join" href="/join" class="btn">Sign-up</a>
