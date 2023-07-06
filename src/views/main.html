@@ -3,49 +3,55 @@
 {% block content %}
     <div class="timeline">
         {% if user %}
-            <div>
-                <form id="twit-form" action="/auth/post" method="post">
-                    <div class="input-group">
-                        <input id="twit" type="text" name="content" maxlength="140">
-                    </div>
-                    <div>
-                        <button id="twit-btn" type="submit" class="btn">Post</button>
-                    </div>
-                </form>
-            </div>
+        <div>
+            <form id="twit-form" action="/auth/post" method="post">
+                <div class="input-group">
+                    <input id="twit" type="text" name="content" maxlength="140">
+                </div>
+                <div>
+                    <button id="twit-btn" type="submit" class="btn">Post</button>
+                </div>
+            </form>
+        </div>
+        
+        <div id="question-container"></div>
+        
+        <script>
+            const questionForm = document.getElementById("twit-form");
+            // const questionContainer = document.getElementById("question-container");
+
+            questionForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+                const questionInput = document.getElementById("twit");
+                const question = questionInput.value;
+
+                // Danh sách các từ không được phép
+                const badWords = ["bad", "fuck", "bitch"];
+
+                // Kiểm tra xem câu hỏi có chứa từ không được phép không
+                for (let i = 0; i < badWords.length; i++) {
+                    if (question.includes(badWords[i])) {
+                        alert("Invalid question!");
+                        return;
+                    }
+                }
+                // If no forbidden words found, submit the form
+                questionForm.submit();
+
+
+
+            });
+        </script>
         {% endif %}
-    </div>
-        <div id="posted-questions">
-          <!-- Existing posted questions will be displayed here -->
-          {% for post in posts %}
-              <p class="question-content">{{ post.content }}</p>
-          {% endfor %}
-      </div>
+
+    <!-- </div>
+    //     <div id="posted-questions">
+
+    //       {% for post in posts %}
+    //           <p class="question-content">{{ post.content }}</p>
+    //       {% endfor %}
+    //   </div> -->
+      
   </div>
 
 {% endblock %}
-
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#twit-form').submit(function(event) {
-                event.preventDefault(); // Prevent the form from submitting normally
-
-                var formData = $(this).serialize(); // Get the form data
-
-                // Send an AJAX request to the server
-                $.ajax({
-                    type: 'POST',
-                    url: '/post',
-                    data: formData,
-                    success: function(response) {
-                        // Handle the server response
-
-                        // Assuming the response is the HTML content of the newly created post
-                        $('#posted-questions').prepend(response); // Prepend the new post to the existing ones
-                        $('#twit').val(''); // Clear the textarea
-                    }
-                });
-            });
-        });
-    </script> -->
