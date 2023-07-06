@@ -12,8 +12,8 @@ async function createAdmin() {
   try {
     User.initiate(sequelize);
 
-    const email = 'admin@example.com';
-    const nick = 'admin';
+    const email = 'admin1@example.com';
+    const nick = 'admin1';
     const plainPassword = '123';
     const role = 'admin';
 
