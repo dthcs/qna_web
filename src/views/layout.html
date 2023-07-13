@@ -79,7 +79,7 @@
       <div class="profile-wrap">
         <div class="profile">
           {% if user and user.id %}
-            <div class="user-name">{{'안녕하세요! ' + user.nick + '님'}}</div>
+            <div class="user-name">{{'Hello! ' + user.nick }}</div>
             <div class="half">
               <div>Following</div>
               <div class="count following-count">{{followingCount}}</div>
@@ -119,7 +119,7 @@
         </footer> -->
 
      <!--Footer Start-->
-     <a href="#" class="scroll-top-button">
+     <a href="" class="scroll-button">
       <span class="arrow"></span>
     </a>
 
@@ -145,7 +145,7 @@
         }
       };
 
-      document.querySelector('.scroll-top-button').addEventListener('click', function (e) {
+      document.querySelector('.scroll-button').addEventListener('click', function (e) {
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
@@ -154,3 +154,4 @@
     {% endblock %}
   </body>
 </html>
+

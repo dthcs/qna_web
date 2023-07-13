@@ -58,6 +58,7 @@ exports.logout = (req, res) => {
   });
 };
 
+
 exports.post = async (req, res, next) => {
   // const { email, nick, password, role } = req.body;
   const { content } = req.body;
@@ -67,10 +68,12 @@ exports.post = async (req, res, next) => {
     //   return res.redirect('/join?error=exist');
     // }
     // const hash = await bcrypt.hash(password, 12);
-    await Post.create({
+    const newPost = await Post.create({
       content,
     });
-    return res.redirect('/');
+    /// Return the created post as the response
+    res.json({ success: true, post: newPost });
+    // return res.redirect('/');
   } catch (error) {
     console.error(error);
     return next(error);

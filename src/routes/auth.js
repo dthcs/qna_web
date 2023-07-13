@@ -18,7 +18,10 @@ router.post('/login', isNotLoggedIn, login);
 // GET /auth/logout
 router.get('/logout', isLoggedIn, logout);
 
+// POST /auth/post : post question
 router.post('/post', isLoggedIn, post);
+
+
 
 // // GET /auth/kakao
 // router.get('/kakao', passport.authenticate('kakao'));

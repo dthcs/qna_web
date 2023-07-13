@@ -12,10 +12,11 @@ const pageRouter = require('./routes/page');
 const authRouter = require('./routes/auth');
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
+const apiRouter = require('./api/api');
 
 const app = express();
 passportConfig(); // 패스포트 설정
-app.set('port', process.env.PORT || 8001);
+app.set('port', process.env.PORT || 8002);
 app.set('view engine', 'html');
 nunjucks.configure('views', {
   express: app,
@@ -23,7 +24,7 @@ nunjucks.configure('views', {
 });
 sequelize.sync({ force: false })
   .then(() => {
-    console.log('데이터베이스 연결 성공');
+    console.log('Connect database successfully');
   })
   .catch((err) => {
     console.error(err);
@@ -49,8 +50,10 @@ app.use(passport.session());
 app.use('/', pageRouter);
 app.use('/auth', authRouter);
 
+app.use('/api', apiRouter);
+
 app.use((req, res, next) => {
-  const error =  new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
+  const error =  new Error(`${req.method} ${req.url} No router.`);
   error.status = 404;
   next(error);
 });
@@ -63,5 +66,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(app.get('port'), () => {
-  console.log(app.get('port'), '번 포트에서 대기중');
+  console.log(app.get('port'), 'port waiting');
 });

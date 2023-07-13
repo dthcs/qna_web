@@ -15,42 +15,92 @@
         </div>
         
         <div id="question-container"></div>
-        
+
         <script>
-            const questionForm = document.getElementById("twit-form");
-            // const questionContainer = document.getElementById("question-container");
-
-            questionForm.addEventListener("submit", function (event) {
-                event.preventDefault();
-                const questionInput = document.getElementById("twit");
-                const question = questionInput.value;
-
-                // Danh sách các từ không được phép
-                const badWords = ["bad", "fuck", "bitch"];
-
-                // Kiểm tra xem câu hỏi có chứa từ không được phép không
-                for (let i = 0; i < badWords.length; i++) {
-                    if (question.includes(badWords[i])) {
-                        alert("Invalid question!");
-                        return;
-                    }
+            // Function to display the stored posts in the question container
+            function displayStoredPosts(posts) {
+              const questionContainer = document.getElementById('question-container');
+        
+              // Loop through each post and create a paragraph element to display it
+              posts.forEach(post => {
+                const questionElement = document.createElement('p');
+                questionElement.textContent = post.content;
+                questionContainer.appendChild(questionElement);
+              });
+            }
+        
+            // Function to fetch the stored posts from the server
+            function fetchStoredPosts() {
+              fetch('/api/posts')
+                .then(response => response.json())
+                .then(data => {
+                  if (data.success) {
+                    const posts = data.posts;
+        
+                    // Call the displayStoredPosts function to display the stored posts
+                    displayStoredPosts(posts);
+                  }
+                })
+                .catch(error => {
+                  console.error(error);
+                });
+            }
+        
+            // Call the fetchStoredPosts function when the page loads
+            document.addEventListener('DOMContentLoaded', fetchStoredPosts);
+        
+            const twitForm = document.getElementById("twit-form");
+            twitForm.addEventListener("submit", function (event) {
+              event.preventDefault(); // Prevent the default form submission
+        
+              const questionInput = document.getElementById("twit");
+              const question = questionInput.value;
+        
+              // Danh sách các từ không được phép
+              const badWords = ["bad", "fuck", "bitch"];
+        
+              // Kiểm tra xem câu hỏi có chứa từ không được phép không
+              for (let i = 0; i < badWords.length; i++) {
+                if (question.includes(badWords[i])) {
+                  alert("Invalid question!");
+                  return;
                 }
-                // If no forbidden words found, submit the form
-                questionForm.submit();
-
-
-
+              }
+        
+              // Send the POST request to the backend
+              fetch('/auth/post', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ content: question })
+              })
+                .then(response => response.json())
+                .then(data => {
+                  // If the backend successfully saved the text
+                  if (data.success) {
+                    const newPost = data.post;
+        
+                    // Create a new paragraph element
+                    const questionElement = document.createElement("p");
+                    questionElement.textContent = newPost.content;
+        
+                    // Append the new element to the question container
+                    const questionContainer = document.getElementById("question-container");
+                    questionContainer.appendChild(questionElement);
+        
+                    // Clear the input field
+                    questionInput.value = "";
+                  }
+                })
+                .catch(error => {
+                  console.error(error);
+                });
             });
         </script>
+        
         {% endif %}
 
-    <!-- </div>
-    //     <div id="posted-questions">
-
-    //       {% for post in posts %}
-    //           <p class="question-content">{{ post.content }}</p>
-    //       {% endfor %}
-    //   </div> -->
       
   </div>
 
